@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CadastroAlunos</string>
+    <string name="ra">Ra</string>
+    <string name="nome">Name</string>
+    <string name="cpf">CPF</string>
+    <string name="dtNasc">Dt Nascimento</string>
+    <string name="dtInscricao">Dt Matricula</string>
+    <string name="cursos">Cursos</string>
+    <string name="periodo">Período</string>
+    <string name="selecioneCurso">Selecione o Curso</string>
+    <string name="selecionePeriodo">Selecione o Período</string>
+    <string name="limpar">Limpar</string>
+    <string name="salvar">Salvar</string>
+</resources>
