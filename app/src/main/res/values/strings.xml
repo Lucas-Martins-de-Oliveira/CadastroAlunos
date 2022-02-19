@@ -9,4 +9,6 @@
     <string name="periodo">Período</string>
     <string name="selecioneCurso">Selecione o Curso</string>
     <string name="selecionePeriodo">Selecione o Período</string>
+    <string name="limpar">Limpar</string>
+    <string name="salvar">Salvar</string>
 </resources>
