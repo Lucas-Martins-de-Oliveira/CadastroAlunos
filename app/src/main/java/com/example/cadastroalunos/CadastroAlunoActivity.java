@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,10 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.example.cadastroalunos.util.CpfMask;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.Calendar;
 
 public class CadastroAlunoActivity extends AppCompatActivity {
 
@@ -25,6 +30,11 @@ public class CadastroAlunoActivity extends AppCompatActivity {
     private TextInputEditText edDtmat;
     private MaterialSpinner spCursos;
     private MaterialSpinner spPeriodo;
+
+    private int vAno;
+    private int vMes;
+    private int vDia;
+    private View dataSelecionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,14 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         edCpfAluno.addTextChangedListener(CpfMask.insert(edCpfAluno));
         iniciaSpinners();
 
+        setDataAtual();
+    }
+
+    private void setDataAtual() {
+        final Calendar calendar = Calendar.getInstance();
+        vDia = calendar.get(Calendar.DAY_OF_MONTH);
+        vMes = calendar.get(Calendar.MONTH);
+        vAno = calendar.get(Calendar.YEAR);
     }
 
     private void iniciaSpinners() {
@@ -116,5 +134,31 @@ public class CadastroAlunoActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void selecionarData(View view) {
+        dataSelecionada = view;
+        showDialog(0);
+    }
+
+    private DatePickerDialog.OnDateSetListener setDatePicker = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+            vAno = year;
+            vMes = month;
+            vDia = day;
+
+            atualizaData();
+        }
+    };
+
+    private void atualizaData() {
+        TextInputEditText edit = (TextInputEditText)dataSelecionada;
+        edit.setText(new StringBuilder().append(vDia).append("/").append(vMes + 1).append("/").append(vAno));
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        return new DatePickerDialog(this, setDatePicker, vAno, vMes, vDia);
     }
 }
