@@ -9,7 +9,7 @@ public abstract class CpfMask {
     private static final String maskCpf = "###.###.###-##";
 
     public static String unMask(String s) {
-        return s.replaceAll("[^0-9]*", null);
+        return s.replaceAll("[^0-9]*", "");
     }
 
     //está "assistindo" o que você está digitando.
@@ -25,7 +25,7 @@ public abstract class CpfMask {
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 String str = CpfMask.unMask(charSequence.toString());
                 String mascara = "";
                 if (isUpdating) {
@@ -34,6 +34,7 @@ public abstract class CpfMask {
                     return;
                 }
 
+                int i = 0;
                 for (char m : maskCpf.toCharArray()) {
                     if ((m != '#' && str.length() > old.length()) || (m != '#' && str.length() < old.length() &&
                             str.length() != i)) {
