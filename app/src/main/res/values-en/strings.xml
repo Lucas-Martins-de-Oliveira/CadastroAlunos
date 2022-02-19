@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CadastroAlunos</string>
+    <string name="app_name">RegistrationStudents</string>
     <string name="ra">Ra</string>
     <string name="nome">Name</string>
-    <string name="cpf">CPF</string>
-    <string name="dtNasc">Dt Nascimento</string>
-    <string name="dtInscricao">Dt Matricula</string>
-    <string name="cursos">Cursos</string>
-    <string name="periodo">Período</string>
-    <string name="selecioneCurso">Selecione o Curso</string>
-    <string name="selecionePeriodo">Selecione o Período</string>
-    <string name="limpar">Limpar</string>
-    <string name="salvar">Salvar</string>
+    <string name="cpf">Passport</string>
+    <string name="dtNasc">Birth Date</string>
+    <string name="dtInscricao">Enrollment Date</string>
+    <string name="cursos">Courses</string>
+    <string name="periodo">Period</string>
+    <string name="selecioneCurso">Select the Course</string>
+    <string name="selecionePeriodo">Select the Period</string>
+    <string name="limpar">Clear</string>
+    <string name="salvar">Save</string>
 </resources>
