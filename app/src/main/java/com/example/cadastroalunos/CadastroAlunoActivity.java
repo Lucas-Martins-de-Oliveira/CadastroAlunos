@@ -14,9 +14,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.cadastroalunos.dao.AlunoDAO;
+import com.example.cadastroalunos.model.Aluno;
 import com.example.cadastroalunos.util.CpfMask;
+import com.example.cadastroalunos.util.Util;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
@@ -30,6 +34,7 @@ public class CadastroAlunoActivity extends AppCompatActivity {
     private TextInputEditText edDtmat;
     private MaterialSpinner spCursos;
     private MaterialSpinner spPeriodo;
+    private LinearLayout lnPrincipal;
 
     private int vAno;
     private int vMes;
@@ -46,6 +51,10 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         edCpfAluno = findViewById(R.id.edCPFAluno);
         edDtmat = findViewById(R.id.edDtMatAluno);
         edDtNasc = findViewById(R.id.edDtNascAluno);
+        lnPrincipal = findViewById(R.id.lnPrincipal);
+
+        edDtNasc.setFocusable(false);
+        edDtmat.setFocusable(false);
 
         edCpfAluno.addTextChangedListener(CpfMask.insert(edCpfAluno));
         iniciaSpinners();
@@ -108,6 +117,38 @@ public class CadastroAlunoActivity extends AppCompatActivity {
             edCpfAluno.requestFocus();
             return;
         }
+
+        if (edDtNasc.getText().toString().equals("")) {
+            edDtNasc.setError("Informe a Data de Nascimento!");
+            edDtNasc.requestFocus();
+            return;
+        }
+
+        if (edDtmat.getText().toString().equals("")) {
+            edDtmat.setError("Informe a Data de Nascimento!");
+            edDtmat.requestFocus();
+            return;
+        }
+
+        salvarAluno();
+    }
+
+    public void salvarAluno() {
+        Aluno aluno = new Aluno();
+        aluno.setRa(Integer.parseInt(edRaAluno.getText().toString()));
+        aluno.setNome(edNomeAluno.getText().toString());
+        aluno.setCpf(edCpfAluno.getText().toString());
+        aluno.setDtNasc(edDtNasc.getText().toString());
+        aluno.setDtMatricula(edDtmat.getText().toString());
+        aluno.setCurso(spCursos.getSelectedItem().toString());
+        aluno.setPeriodo(spPeriodo.getSelectedItem().toString());
+
+        if (AlunoDAO.salvar(aluno) > 0) {
+            Util.customSnackBar(lnPrincipal, "Aluno (" + aluno.getNome() + ") salvo com sucesso", 1);
+            limparCampos();
+        } else
+            Util.customSnackBar(lnPrincipal, "Erro ao salvar o aluno (" + aluno.getNome() + "). " +
+                                "Verifique o Log", 0);
     }
 
     //para chamar o "Menu ToolBar" do menu_cadastro.xml
@@ -123,6 +164,7 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         //item recebe o que eu acabei de clicar
         switch (item.getItemId()) {
             case R.id.mn_limpar:
+                limparCampos();
                 Toast.makeText(this, "clicou menu Limpar", Toast.LENGTH_SHORT).show();
                 //TODO: adicionar método de limpar dados
                 return true;
@@ -134,6 +176,14 @@ public class CadastroAlunoActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void limparCampos() {
+        edRaAluno.setText("");
+        edNomeAluno.setText("");
+        edCpfAluno.setText("");
+        edDtNasc.setText("");
+        edDtmat.setText("");
     }
 
     public void selecionarData(View view) {
