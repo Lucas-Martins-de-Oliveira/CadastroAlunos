@@ -1,6 +1,7 @@
 package com.example.cadastroalunos.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,16 +52,29 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.AlunoViewHol
     @NonNull
     @Override
     public AlunoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_aluno, parent, false);
+
+        AlunoAdapter.AlunoViewHolder viewHolder = new AlunoViewHolder(view);
+
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull AlunoViewHolder holder, int position) {
+        Aluno aluno = listaAlunos.get(position);
 
+        holder.edRaAluno.setText(String.valueOf(aluno.getRa()));
+        holder.edCpfAluno.setText(aluno.getCpf());
+        holder.edNomeAluno.setText(aluno.getNome());
+        holder.edCurso.setText(aluno.getCurso());
+        holder.edPeriodo.setText(aluno.getPeriodo());
+        holder.edDtMatricula.setText(aluno.getDtMatricula());
+        holder.edDtNasc.setText(aluno.getDtNasc());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listaAlunos.size();
     }
 }
