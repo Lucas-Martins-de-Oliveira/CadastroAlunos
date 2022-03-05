@@ -129,7 +129,6 @@ public class CadastroAlunoActivity extends AppCompatActivity {
             edDtmat.requestFocus();
             return;
         }
-
         salvarAluno();
     }
 
