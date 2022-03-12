@@ -50,7 +50,7 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.AlunoViewHol
     }
 
     @NonNull
-    @Override
+    @Override //resp. por desenhar o cardView
     public AlunoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_aluno, parent, false);
@@ -60,7 +60,7 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.AlunoViewHol
         return viewHolder;
     }
 
-    @Override
+    @Override //a cada elemento da lista eu pego o objeto
     public void onBindViewHolder(@NonNull AlunoViewHolder holder, int position) {
         Aluno aluno = listaAlunos.get(position);
 
@@ -74,7 +74,7 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.AlunoViewHol
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount() { //garante quantas vezes eu repito o ListWiew
         return listaAlunos.size();
     }
 }

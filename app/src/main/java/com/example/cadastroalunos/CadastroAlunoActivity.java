@@ -143,8 +143,8 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         aluno.setPeriodo(spPeriodo.getSelectedItem().toString());
 
         if (AlunoDAO.salvar(aluno) > 0) {
-            Util.customSnackBar(lnPrincipal, "Aluno (" + aluno.getNome() + ") salvo com sucesso", 1);
-            limparCampos();
+            setResult(RESULT_OK);
+            finish();
         } else
             Util.customSnackBar(lnPrincipal, "Erro ao salvar o aluno (" + aluno.getNome() + "). " +
                                 "Verifique o Log", 0);

@@ -18,6 +18,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cadastrarAluno(View view) {
+        Aluno aluno = new Aluno(123, "aaaa", "123", "1/1/1", "1/1/1", "curso", "1 periodo");
+        AlunoDAO.salvar(aluno);
+
+        Aluno aluno1 = new Aluno(123, "bbbb", "123", "1/1/1", "1/1/1", "curso", "1 periodo");
+        AlunoDAO.salvar(aluno1);
+
+        Aluno aluno2 = new Aluno(123, "cccc", "123", "1/1/1", "1/1/1", "curso", "1 periodo");
+        AlunoDAO.salvar(aluno2);
+
         Intent intent = new Intent(this, ListaAlunoActivity.class);
         startActivity(intent);
     }
